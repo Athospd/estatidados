@@ -1,10 +1,15 @@
 library(torch)
 library(tidyverse)
 
+
+# regressão linear: b0 + b1*x
+# OBJETIVO: achar o melhor parzinho b0 e b1
+# "melhor" aqui: aquele parzinho que faz o RMSE ser o menor possível
+
 # dados -------------------------------------------------------------------
 plot(cars)
 
-# modelo ------------------------------------------------------------------
+# funcao de custo ------------------------------------------------------------------
 rmse <- function(y, pred) {
   torch_sqrt(torch_mean((y - pred)^2))
 }
