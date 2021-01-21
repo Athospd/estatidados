@@ -4,7 +4,7 @@ f <- function(x) x * (x - 1)
 
 plot(f)
 
-# queremos achar o x que minimiza f
+# OBJETIVO: queremos achar o x que minimiza f
 x <- torch_tensor(0, requires_grad = TRUE)
 
 x$grad

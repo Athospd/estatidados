@@ -84,12 +84,16 @@ Daniel Falbel
 
 ## Torch - Coisas boas  
 
+- Autograd! (vou explicar =P)
 - Pronto pra GPU
 - Rápido/Eficiente (C++)
 - Mais fácil de debugar, experimentar, brincar
 - Modular, flexível, legal para criar coisas novas/pesquisa
 - Comunidade grande e crescendo
 
+## Links úteis
 
+- [RStudio AI Blog](https://blogs.rstudio.com/ai/)
+- [Códigos dessa Live](https://github.com/athospd/estatidados)
 
 
