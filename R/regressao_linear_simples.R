@@ -24,9 +24,11 @@ for(passo in 1:100) {
   custo <- rmse(predito, esperado)
   custo$backward()
 
-  with_no_grad(b0$subtract_(0.0001 * b0$grad)) # b0 - 0.001 * df/db0
-  with_no_grad(b1$subtract_(0.0001 * b1$grad)) # b1 - 0.001 * df/db1
+  with_no_grad(b0$subtract_(0.005 * b0$grad)) # b0 - 0.005 * df/db0
+  with_no_grad(b1$subtract_(0.005 * b1$grad)) # b1 - 0.005 * df/db1
 
+  b0$grad$zero_()
+  b1$grad$zero_()
 
   Sys.sleep(0.05)
   plot(cars)
@@ -39,7 +41,7 @@ for(passo in 1:100) {
 # Exemplo menos manual ----------------------------------------------------
 lin <- nn_linear(1,1)
 mse <- nn_mse_loss()
-opt <- torch::optim_adam(lin$parameters, lr = 0.5)
+opt <- torch::optim_adam(lin$parameters, lr = 0.2)
 
 x <- torch_tensor(cars$speed)
 y <- torch_tensor(cars$dist)
@@ -56,7 +58,7 @@ for(i in 1:100) {
   opt$step()
 
   custos <- c(custos, as.numeric(custo))
-  Sys.sleep(0.05)
+  Sys.sleep(0.1)
   plot(cars)
   lines(x, pred, col = "red", lwd = 5)
 }

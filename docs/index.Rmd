@@ -79,3 +79,17 @@ Daniel Falbel
 
 
 ]
+
+---
+
+## Torch - Coisas boas  
+
+- Pronto pra GPU
+- Rápido/Eficiente (C++)
+- Mais fácil de debugar, experimentar, brincar
+- Modular, flexível, legal para criar coisas novas/pesquisa
+- Comunidade grande e crescendo
+
+
+
+
