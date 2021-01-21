@@ -1,0 +1,73 @@
+---
+title: "Introdução ao Torch"
+subtitle: "Athos Damiani"
+author: "<img src = 'https://d33wubrfki0l68.cloudfront.net/9b0699f18268059bdd2e5c21538a29eade7cbd2b/67e5c/img/logo/cursor1-5.png' width = '40%'>"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["default", "default-fonts", "css/custom.css", "css/curso-r-bg.css", "css/xaringan-themer.css"]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+---
+
+```{r setup, include=FALSE}
+library(ggplot2)
+library(magrittr)
+library(knitr)
+library(tidymodels)
+library(tidyverse)
+library(kableExtra)
+theme_set(theme_minimal(14))
+options(htmltools.dir.version = FALSE, fig.retina = 2)
+```
+
+
+
+# Curso-R
+
+<img src="img/professores.png" style=" display: block; margin-left: auto; margin-right: auto;" width = 75% ></img>
+
+---
+
+## Linha do tempo
+
+<center>
+<img src="img/linha_do_tempo.png" width = 35%></img>
+</center>
+
+---
+
+## Torch
+
+.pull-left[
+
+```{r}
+library(torch)
+
+torch_rand(3,4)
+```
+
+
+]
+
+.pull-right[
+
+## Criador
+
+(foto do dan)
+
+]
+
+---
+
+## Torch - Ecossistema
+
+- [{torch}](https://torch.mlverse.org/) - Principal
+- [{torchvision}]() - Funções e datasets para imagens
+- [{torchdatasets}]() - datasets prontos para torch
+- [{torchaudio}]() - Funões e datasets para áudios
+- [{tabnet}]() - Funções para dados tabulares + backend para tidymodels
