@@ -5,8 +5,8 @@ library(tidyverse)
 plot(cars)
 
 # modelo ------------------------------------------------------------------
-mse <- function(y, pred) {
-  torch_mean((y - pred)^2)
+rmse <- function(y, pred) {
+  torch_sqrt(torch_mean((y - pred)^2))
 }
 
 # b0 e b1: queremos otimizá-los, por isso requires_grad = TRUE
@@ -16,14 +16,21 @@ b1 <- torch_rand(1, requires_grad = TRUE)
 x <- torch_tensor(cars$speed)
 y <- torch_tensor(cars$dist)
 
-plot(cars)
 for(passo in 1:100) {
-  pred <- b0 + b1 * x # regressão
-  custo <- rmse(pred, y)
+
+  predito <- b0 + b1 * x # regressão
+  esperado <- y
+
+  custo <- rmse(predito, esperado)
   custo$backward()
-  b0 <- b0$subtract(0.001 * b0$grad)
-  b1 <- b1$subtract(0.001 * b1$grad)
-  lines(x, pred, col = "red")
+
+  with_no_grad(b0$subtract_(0.0001 * b0$grad)) # b0 - 0.001 * df/db0
+  with_no_grad(b1$subtract_(0.0001 * b1$grad)) # b1 - 0.001 * df/db1
+
+
+  Sys.sleep(0.05)
+  plot(cars)
+  lines(x, predito, col = "red", lwd = 5)
 }
 
 
@@ -41,7 +48,7 @@ x <- x$unsqueeze(2)
 y <- y$unsqueeze(2)
 
 custos <- c()
-for(i in 1:200) {
+for(i in 1:100) {
   opt$zero_grad()
   pred <- lin(x)
   custo <- mse(y, pred)

@@ -70,17 +70,17 @@ img_convolucionada <- conv(img_torch)
 image(as.matrix(img_convolucionada$squeeze()), col = gray.colors(257, 0, 1))
 
 # modelo ------------------------------------------------------------------
-meu_modelo <- torch::nn_module(
-  "MeuModelo",
-  initialize = function() {
-    # parametros
-    # self$conv1 <- nn_conv2d(...)
-  },
-  forward = function() {
-    # o deep learninzinho
-    # o encadeamento de camadas
-  }
-)
+# meu_modelo <- torch::nn_module(
+#   "MeuModelo",
+#   initialize = function() {
+#     # parametros
+#     # self$conv1 <- nn_conv2d(...)
+#   },
+#   forward = function() {
+#     # o deep learninzinho
+#     # o encadeamento de camadas
+#   }
+# )
 
 cnn_do_athos <- nn_module(
   "CNNdoAthos",

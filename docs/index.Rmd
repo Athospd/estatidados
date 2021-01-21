@@ -33,14 +33,6 @@ options(htmltools.dir.version = FALSE, fig.retina = 2)
 
 ---
 
-## Linha do tempo
-
-<center>
-<img src="img/linha_do_tempo.png" width = 35%></img>
-</center>
-
----
-
 ## Torch
 
 .pull-left[
@@ -51,6 +43,9 @@ library(torch)
 torch_rand(3,4)
 ```
 
+- Álgebra Linear/Matrizes
+- Otimização
+- Deep Learning
 
 ]
 
@@ -58,7 +53,9 @@ torch_rand(3,4)
 
 ## Criador
 
-(foto do dan)
+<img src="https://pbs.twimg.com/profile_images/1006270897597091842/l6xh87t2.jpg" style=" display: block; margin-left: auto; margin-right: auto;width:280px;"></img>
+
+Daniel Falbel
 
 ]
 
@@ -66,8 +63,19 @@ torch_rand(3,4)
 
 ## Torch - Ecossistema
 
+.pull-left[
+
 - [{torch}](https://torch.mlverse.org/) - Principal
-- [{torchvision}]() - Funções e datasets para imagens
-- [{torchdatasets}]() - datasets prontos para torch
-- [{torchaudio}]() - Funões e datasets para áudios
-- [{tabnet}]() - Funções para dados tabulares + backend para tidymodels
+- [{torchvision}](https://torchvision.mlverse.org/) - Funções e datasets para imagens
+- [{torchdatasets}](https://mlverse.github.io/torchdatasets/) - datasets prontos para torch
+- [{tabnet}](https://mlverse.github.io/tabnet/) - Funções para dados tabulares + backend para tidymodels
+- [{torchaudio}](https://curso-r.github.io/torchaudio/) - Funões e datasets para áudios
+
+]
+
+.pull-right[
+
+<img src="img/torch.png" style=" display: block; margin-left: auto; margin-right: auto;width:300px;"></img>
+
+
+]
