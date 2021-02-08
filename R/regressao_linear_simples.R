@@ -10,6 +10,7 @@ library(tidyverse)
 plot(cars)
 
 # funcao de custo ------------------------------------------------------------------
+#f(x)
 rmse <- function(y, pred) {
   torch_sqrt(torch_mean((y - pred)^2))
 }
@@ -44,7 +45,7 @@ for(passo in 1:100) {
 
 
 # Exemplo menos manual ----------------------------------------------------
-lin <- nn_linear(1,1)
+lin <- nn_linear(1,1)  #b0 e b1
 mse <- nn_mse_loss()
 opt <- torch::optim_adam(lin$parameters, lr = 0.2)
 
@@ -57,7 +58,8 @@ y <- y$unsqueeze(2)
 custos <- c()
 for(i in 1:100) {
   opt$zero_grad()
-  pred <- lin(x)
+
+  pred <- lin(x) # b0 + b1*x
   custo <- mse(y, pred)
   custo$backward()
   opt$step()

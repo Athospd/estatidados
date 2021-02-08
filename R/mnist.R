@@ -1,6 +1,6 @@
 library(torch)
 library(torchvision)
-library(mestrado)
+library(mestrado) # remotes::install_github("athospd/mestrado")
 library(tidymodels)
 
 # dados -------------------------------------------------------------------
@@ -65,9 +65,13 @@ conv1 <- nn_conv2d(1, 1, c(3,3)) # <--------- operador de CNN!
 
 ##
 
-
-img_convolucionada <- conv(img_torch)
+# imagem convolucionada
+img_convolucionada <- conv1(img_torch)
 image(as.matrix(img_convolucionada$squeeze()), col = gray.colors(257, 0, 1))
+
+# filtro
+image(as.matrix(conv1$parameters$weight$squeeze()), col = gray.colors(257, 0, 1))
+
 
 # modelo ------------------------------------------------------------------
 # meu_modelo <- torch::nn_module(
@@ -98,12 +102,15 @@ cnn_do_athos <- nn_module(
       self$conv1() %>%
       torch_relu() %>%
       nnf_avg_pool2d(c(2,2)) %>%
+
       self$conv2() %>%
       torch_relu() %>%
       nnf_avg_pool2d(c(2,2)) %>%
+
       self$conv3() %>%
       torch_relu() %>%
       nnf_avg_pool2d(c(2,2)) %>%
+
       torch_flatten(start_dim = 2) %>%
       self$linear1() %>%
       torch_relu() %>%
