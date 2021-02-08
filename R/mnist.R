@@ -123,6 +123,13 @@ modelinho <- cnn_do_athos()
 # teste
 modelinho(batch_de_teste)
 
+# device ------------------------------------------------------------------
+
+cuda_ou_cpu <- if(torch::cuda_is_available()) "cuda" else "cpu"
+device <- torch_device(cuda_ou_cpu)
+
+modelinho$to(device = device) # in place!!
+
 # otimizador --------------------------------------------------------------
 otimizador <- optim_adam(modelinho$parameters)
 
@@ -132,17 +139,20 @@ funcao_de_custo <- nn_cross_entropy_loss() # binary cross entropy
 # ajuste do modelo --------------------------------------------------------
 library(progress)
 
-for(epoch in 1:10) {
+for(epoch in 1:3) {
   pb <- progress_bar$new(total = length(ds_train))
   for(batch in enumerate(ds_train)) {
-    otimizador$zero_grad()
+    if(!is.null(batch[[1]])) {
+      otimizador$zero_grad()
 
-    esperado <- modelinho(batch[[1]]*1.)
-    observado <- batch[[2]]
-    custo <- funcao_de_custo(esperado, observado)
-    custo$backward()
+      esperado <- modelinho(batch[[1]]$to(device = device)*1.)
+      observado <- batch[[2]]$to(device = device)
 
-    otimizador$step()
+      custo <- funcao_de_custo(esperado, observado)
+      custo$backward()
+
+      otimizador$step()
+    }
     pb$tick()
   }
 }
@@ -154,11 +164,11 @@ predicoes <- tibble(
 )
 
 for(batch in enumerate(ds_test)) {
-  esperado <- modelinho(batch[[1]]*1.) %>% torch_argmax(dim = 2)
+  esperado <- modelinho(batch[[1]]$to(device = device)*1.) %>% torch_argmax(dim = 2)
 
   predicoes_batch <- tibble(
-    esperado = as.numeric(esperado),
-    observado = as.numeric(batch[[2]])
+    esperado = as.numeric(esperado)$to(device = torch_device("cpu")),
+    observado = as.numeric(batch[[2]]$to(device = torch_device("cpu")))
   )
 
   predicoes <- bind_rows(predicoes, predicoes_batch)
